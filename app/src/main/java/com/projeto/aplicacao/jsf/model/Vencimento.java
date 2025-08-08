@@ -38,6 +38,7 @@ public class Vencimento {
     private BigDecimal valor;
 
     @Enumerated(EnumType.STRING)
+    @Column(name = "tipo")
     private TipoVencimento tipo;
 
     @OneToMany(mappedBy = "vencimento")
