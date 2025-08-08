@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="jakarta.faces.core">
+<h:head>
+    <title>Cadastro de Vencimento</title>
+</h:head>
+<h:body>
+    <h1>Cadastro de Vencimento</h1>
+ 
+    <h:form>
+        <h:messages globalOnly="true" />
+
+        <h:panelGrid columns="2" cellpadding="5">
+            <h:outputLabel for="descricao" value="Descrição:" />
+            <h:inputText id="descricao" value="#{vencimentoBean.vencimento.descricao}" required="true" />
+
+            <h:outputLabel for="valor" value="Valor:" />
+            <h:inputText id="valor" value="#{vencimentoBean.vencimento.valor}" required="true" />
+
+            <h:outputLabel for="tipo" value="Tipo:" />
+            <h:selectOneMenu id="tipo" value="#{vencimentoBean.vencimento.tipo}" required="true">
+                <f:selectItem itemLabel="Selecione" itemValue="" />
+                <f:selectItems value="#{vencimentoBean.tipos}" var="tipo" itemLabel="#{tipo}" itemValue="#{tipo}" />
+            </h:selectOneMenu>
+        </h:panelGrid>
+
+        <h:commandButton value="Salvar" action="#{vencimentoBean.save}" />
+        <h:commandButton value="Cancelar" action="/vencimento/lista.xhtml?faces-redirect=true" immediate="true" />
+    </h:form>
+</h:body>
+</html>

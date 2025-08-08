@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+<h:head>
+    <title>Lista de Pessoas</title>
+</h:head>
+<h:body>
+    <h1>Lista de Pessoas</h1>
+
+    <h:form>
+        <h:button value="Novo" outcome="/pessoa/form.xhtml?faces-redirect=true" />
+        
+        <h:dataTable value="#{pessoaBean.pessoas}" var="pessoa" border="1" style="margin-top: 20px;" cellpadding="5">
+            <h:column><f:facet name="header">ID</f:facet>#{pessoa.id}</h:column>
+            <h:column><f:facet name="header">Nome</f:facet>#{pessoa.nome}</h:column>
+            <h:column><f:facet name="header">Cidade</f:facet>#{pessoa.cidade}</h:column>
+            <h:column><f:facet name="header">Email</f:facet>#{pessoa.email}</h:column>
+            <h:column><f:facet name="header">CEP</f:facet>#{pessoa.cep}</h:column>
+            <h:column><f:facet name="header">Endereço</f:facet>#{pessoa.endereco}</h:column>
+            <h:column><f:facet name="header">País</f:facet>#{pessoa.pais}</h:column>
+            <h:column>
+                <f:facet name="header">Usuário</f:facet>
+                #{pessoa.usuario != null ? pessoa.usuario.login : '---'}
+            </h:column>
+            <h:column><f:facet name="header">Telefone</f:facet>#{pessoa.telefone}</h:column>
+            <h:column>
+                <f:facet name="header">Data de Nascimento</f:facet>
+                <h:outputText value="#{pessoa.dataNascimento}">
+                    <f:convertDateTime pattern="dd/MM/yyyy" />
+                </h:outputText>
+            </h:column>
+            <h:column>
+                <f:facet name="header">Cargo</f:facet>
+                #{pessoa.cargo != null ? pessoa.cargo.nome : '---'}
+            </h:column>
+            <h:column>
+                <f:facet name="header">Ações</f:facet>
+                <h:commandButton value="Editar" action="#{pessoaBean.edit(pessoa)}" />
+                <h:commandButton value="Excluir" action="#{pessoaBean.delete(pessoa)}" 
+                                 onclick="if(!confirm('Confirma exclusão?')) return false;" />
+            </h:column>
+        </h:dataTable>
+    </h:form>
+</h:body>
+</html>

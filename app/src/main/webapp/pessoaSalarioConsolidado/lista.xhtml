@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="jakarta.faces.html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="jakarta.faces.core">
+
+<h:head>
+    <title>Lista de Salários Consolidados</title>
+</h:head>
+
+<h:body>
+
+<h:form id="formLista">
+
+    <h1>Salários Consolidados</h1>
+
+    <p:toolbar>
+        <p:toolbarGroup>
+            <p:commandButton value="Calcular Salário"
+                             icon="pi pi-calculator"
+                             action="#{salarioBean.calcularSalarios}"
+                             update="tabela mensagens"
+                             process="@this"
+                             styleClass="p-button-success" />
+
+            <p:commandButton value="Gerar Relatório"
+                             icon="pi pi-file-pdf"
+                             ajax="false"
+                             action="#{salarioBean.exportarPDF}"
+                             styleClass="p-button-warning" />
+        </p:toolbarGroup>
+    </p:toolbar>
+
+    <h:messages id="mensagens" globalOnly="true" style="color:red; margin-top:10px;" />
+
+    <p:dataTable id="tabela" 
+                 value="#{pessoaSalarioConsolidadoBean.pessoaSalarioConsolidados}" 
+                 var="psc" 
+                 paginator="true" 
+                 rows="10"
+                 style="margin-top:20px">
+
+        <p:column headerText="ID Pessoa">
+            <h:outputText value="#{psc.id}" />
+        </p:column>
+
+        <p:column headerText="Nome">
+            <h:outputText value="#{psc.nomePessoa}" />
+        </p:column>
+
+        <p:column headerText="Cargo">
+            <h:outputText value="#{psc.nomeCargo}" />
+        </p:column>
+
+        <p:column headerText="Salário">
+            <h:outputText value="#{psc.salario}">
+                <f:convertNumber type="currency" currencySymbol="R$ " maxFractionDigits="2"/>
+            </h:outputText>
+        </p:column>
+
+    </p:dataTable>
+
+</h:form>
+
+</h:body>
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="jakarta.faces.core">
+<h:head>
+    <title>Cadastro de Pessoa</title>
+</h:head>
+<h:body>
+    <h1>Cadastro de Pessoa</h1>
+
+    <h:form>
+        <h:messages globalOnly="true" />
+
+        <h:panelGrid columns="2" cellpadding="5">
+            <h:outputLabel for="nome" value="Nome:" />
+            <h:inputText id="nome" value="#{pessoaBean.pessoa.nome}" required="true" />
+
+            <h:outputLabel for="cidade" value="Cidade:" />
+            <h:inputText id="cidade" value="#{pessoaBean.pessoa.cidade}" />
+
+            <h:outputLabel for="email" value="Email:" />
+            <h:inputText id="email" value="#{pessoaBean.pessoa.email}" required="true" />
+
+            <h:outputLabel for="cep" value="CEP:" />
+            <h:inputText id="cep" value="#{pessoaBean.pessoa.cep}" />
+
+            <h:outputLabel for="endereco" value="Endereço:" />
+            <h:inputText id="endereco" value="#{pessoaBean.pessoa.endereco}" />
+
+            <h:outputLabel for="pais" value="País:" />
+            <h:inputText id="pais" value="#{pessoaBean.pessoa.pais}" />
+
+            <h:outputLabel for="telefone" value="Telefone:" />
+            <h:inputText id="telefone" value="#{pessoaBean.pessoa.telefone}" />
+
+            <h:outputLabel for="dataNascimento" value="Data de Nascimento:" />
+            <h:inputText id="dataNascimento" value="#{pessoaBean.pessoa.dataNascimento}">
+                <f:convertDateTime pattern="yyyy-MM-dd" />
+            </h:inputText>
+
+            <h:outputLabel for="usuario" value="Usuário (ID):" />
+            <h:inputText id="usuario" value="#{pessoaBean.pessoa.usuario.id}" />
+
+            <h:outputLabel for="cargo" value="Cargo (ID):" />
+            <h:inputText id="cargo" value="#{pessoaBean.pessoa.cargo.id}" />
+        </h:panelGrid>
+
+        <h:commandButton value="Salvar" action="#{pessoaBean.save}" />
+        <h:commandButton value="Cancelar" action="/pessoa/lista.xhtml?faces-redirect=true" immediate="true" />
+    </h:form>
+</h:body>
+</html>
