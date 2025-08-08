@@ -15,7 +15,7 @@ import lombok.Setter;
 @ViewScoped
 @Getter
 @Setter
-public class VencimentoBean  implements Serializable {
+public class VencimentoBean implements Serializable {
 
     @Inject
     private VencimentoService vencimentoService;
@@ -45,8 +45,9 @@ public class VencimentoBean  implements Serializable {
         vencimentos.remove(vencimento);
     }
 
-    public void edit(Vencimento vencimento) {
+    public String edit(Vencimento vencimento) {
         this.vencimento = vencimento;
+        return "/vencimento/form.xhtml?faces-redirect=true";
     }
 
     public void clear() {

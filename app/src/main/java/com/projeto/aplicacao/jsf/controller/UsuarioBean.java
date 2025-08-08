@@ -15,7 +15,7 @@ import lombok.Setter;
 @ViewScoped
 @Getter
 @Setter
-public class UsuarioBean  implements Serializable {
+public class UsuarioBean implements Serializable {
 
     @Inject
     private UsuarioService usuarioService;
@@ -45,8 +45,9 @@ public class UsuarioBean  implements Serializable {
         usuarios.remove(usuario);
     }
 
-    public void edit(Usuario usuario) {
+    public String edit(Usuario usuario) {
         this.usuario = usuario;
+        return "/usuario/form.xhtml?faces-redirect=true";
     }
 
     public void clear() {

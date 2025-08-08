@@ -45,8 +45,9 @@ public class CargoBean implements Serializable {
         cargos.remove(cargo);
     }
 
-    public void edit(Cargo cargo) {
+    public String edit(Cargo cargo) {
         this.cargo = cargo;
+        return "/cargo/form.xhtml?faces-redirect=true";
     }
 
     public void clear() {

@@ -7,6 +7,7 @@ import jakarta.faces.context.FacesContext;
 import jakarta.faces.view.ViewScoped;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
+import java.io.File;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -24,6 +25,14 @@ public class ImportarDadosExcelBean implements Serializable  {
     private String caminhoArquivo;
 
     public void importar() {
+        File arquivo = new File(caminhoArquivo);
+
+        if (!arquivo.exists() || !arquivo.isFile()) {
+            FacesContext.getCurrentInstance().addMessage(null,
+                new FacesMessage(FacesMessage.SEVERITY_ERROR, "O arquivo informado não existe!", null));
+            return;
+        }
+
         try {
             importarDadosExcel.importarDados(caminhoArquivo);
             FacesContext.getCurrentInstance().addMessage(null,

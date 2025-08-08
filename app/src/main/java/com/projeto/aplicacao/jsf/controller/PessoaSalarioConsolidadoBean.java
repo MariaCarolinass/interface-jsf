@@ -16,11 +16,9 @@ import lombok.Setter;
 @Getter
 @Setter
 public class PessoaSalarioConsolidadoBean implements Serializable {
-    
+
     @Inject
     private PessoaSalarioConsolidadoService pessoaSalarioConsolidadoService;
-
-    private static final long serialVersionUID = 1L;
 
     private PessoaSalarioConsolidado pessoaSalarioConsolidado;
     private List<PessoaSalarioConsolidado> pessoaSalarioConsolidados;
@@ -28,6 +26,7 @@ public class PessoaSalarioConsolidadoBean implements Serializable {
     @PostConstruct
     public void init() {
         pessoaSalarioConsolidados = pessoaSalarioConsolidadoService.findAllPessoaSalarioConsolidados();
+        pessoaSalarioConsolidado = new PessoaSalarioConsolidado();
     }
 
     public void save() {
@@ -40,25 +39,21 @@ public class PessoaSalarioConsolidadoBean implements Serializable {
         pessoaSalarioConsolidados = pessoaSalarioConsolidadoService.findAllPessoaSalarioConsolidados();
     }
 
-    public void delete(PessoaSalarioConsolidado pessoaSalarioConsolidado) {
-        pessoaSalarioConsolidadoService.deletePessoaSalarioConsolidado(pessoaSalarioConsolidado);
-        pessoaSalarioConsolidados.remove(pessoaSalarioConsolidado);
+    public void delete(PessoaSalarioConsolidado psc) {
+        pessoaSalarioConsolidadoService.deletePessoaSalarioConsolidado(psc);
+        pessoaSalarioConsolidados.remove(psc);
     }
 
-    public void edit(PessoaSalarioConsolidado pessoaSalarioConsolidado) {
-        this.pessoaSalarioConsolidado = pessoaSalarioConsolidado;
+    public void edit(PessoaSalarioConsolidado psc) {
+        this.pessoaSalarioConsolidado = psc;
     }
 
     public void clear() {
         pessoaSalarioConsolidado = new PessoaSalarioConsolidado();
     }
 
-    public List<PessoaSalarioConsolidado> getPessoaSalarioConsolidados() {
-        return pessoaSalarioConsolidados;
-    }
-
     public double getTotalSalario() {
         return pessoaSalarioConsolidadoService.findTotalSalaryByPersonId(pessoaSalarioConsolidado.getPessoaId());
     }
-
+    
 }

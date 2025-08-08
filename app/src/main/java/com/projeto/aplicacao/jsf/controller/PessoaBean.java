@@ -45,8 +45,9 @@ public class PessoaBean implements Serializable {
         pessoas.remove(pessoa);
     }
 
-    public void edit(Pessoa pessoa) {
+    public String edit(Pessoa pessoa) {
         this.pessoa = pessoa;
+        return "/pessoa/form.xhtml?faces-redirect=true";
     }
 
     public void clear() {

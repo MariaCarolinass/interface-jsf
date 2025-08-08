@@ -2,7 +2,9 @@ package com.projeto.aplicacao.jsf.controller;
 
 import java.io.IOException;
 import java.io.Serializable;
+import java.util.List;
 import com.projeto.aplicacao.jsf.service.SalarioService;
+import com.projeto.aplicacao.jsf.model.PessoaSalarioConsolidado;
 import jakarta.faces.application.FacesMessage;
 import jakarta.faces.context.ExternalContext;
 import jakarta.faces.context.FacesContext;
@@ -19,16 +21,26 @@ public class SalarioBean implements Serializable {
     private SalarioService salarioService;
 
     private boolean processando = false;
+    private List<PessoaSalarioConsolidado> pessoaSalarioConsolidados;
 
     public void calcularSalarios() {
         processando = true;
         salarioService.calcularSalarios();
+        pessoaSalarioConsolidados = salarioService.listarSalarios();
+
         FacesContext.getCurrentInstance().addMessage(null,
             new FacesMessage("Cálculo de salários iniciado. Aguarde alguns segundos."));
     }
 
     public boolean isProcessando() {
         return processando;
+    }
+
+    public List<PessoaSalarioConsolidado> getPessoaSalarioConsolidados() {
+        if (pessoaSalarioConsolidados == null) {
+            pessoaSalarioConsolidados = salarioService.listarSalarios();
+        }
+        return pessoaSalarioConsolidados;
     }
 
     public void exportarPDF() {
