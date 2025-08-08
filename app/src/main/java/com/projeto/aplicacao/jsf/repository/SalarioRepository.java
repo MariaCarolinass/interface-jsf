@@ -20,7 +20,7 @@ import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 
 @Stateless
 public class SalarioRepository {
-    
+
     @PersistenceContext
     private EntityManager em;
 
@@ -41,12 +41,10 @@ public class SalarioRepository {
         BigDecimal salario = BigDecimal.ZERO;
 
         List<Vencimento> vencimentos = em.createQuery(
-            "SELECT v FROM CargoVencimentos cv " +
-            "JOIN cv.vencimento v " +
-            "WHERE cv.cargo.id = :cargoId",
-            Vencimento.class)
-        .setParameter("cargoId", pessoa.getCargo().getId())
-        .getResultList();
+                "SELECT v FROM CargoVencimentos cv JOIN cv.vencimento v WHERE cv.cargo.id = :cargoId",
+                Vencimento.class)
+                .setParameter("cargoId", pessoa.getCargo().getId())
+                .getResultList();
 
         for (Vencimento v : vencimentos) {
             if ("CREDITO".equalsIgnoreCase(v.getTipo().toString())) {
@@ -85,4 +83,7 @@ public class SalarioRepository {
         }
     }
     
+    public List<PessoaSalarioConsolidado> listarSalarios() {
+        return pessoaSalarioConsolidadoRepository.findAll();
+    }
 }

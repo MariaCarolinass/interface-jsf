@@ -8,20 +8,20 @@ import jakarta.persistence.PersistenceContext;
 
 @Stateless
 public class PessoaSalarioConsolidadoRepository {
-    
+
     @PersistenceContext
     private EntityManager em;
 
-    public void save(PessoaSalarioConsolidado pessoaSalarioConsolidado) {
-        em.persist(pessoaSalarioConsolidado);
+    public void save(PessoaSalarioConsolidado psc) {
+        em.persist(psc);
     }
 
-    public void update(PessoaSalarioConsolidado pessoaSalarioConsolidado) {
-        em.merge(pessoaSalarioConsolidado);
+    public void update(PessoaSalarioConsolidado psc) {
+        em.merge(psc);
     }
 
-    public void delete(PessoaSalarioConsolidado pessoaSalarioConsolidado) {
-        em.remove(em.contains(pessoaSalarioConsolidado) ? pessoaSalarioConsolidado : em.merge(pessoaSalarioConsolidado));
+    public void delete(PessoaSalarioConsolidado psc) {
+        em.remove(em.contains(psc) ? psc : em.merge(psc));
     }
 
     public PessoaSalarioConsolidado findById(Long id) {
@@ -33,7 +33,7 @@ public class PessoaSalarioConsolidadoRepository {
     }
 
     public Double findTotalSalaryByPersonId(Long personId) {
-        return em.createQuery("SELECT SUM(p.salary) FROM PessoaSalarioConsolidado p WHERE p.person.id = :personId", Double.class)
+        return em.createQuery("SELECT SUM(p.salario) FROM PessoaSalarioConsolidado p WHERE p.pessoaId = :personId", Double.class)
                  .setParameter("personId", personId)
                  .getSingleResult();
     }
