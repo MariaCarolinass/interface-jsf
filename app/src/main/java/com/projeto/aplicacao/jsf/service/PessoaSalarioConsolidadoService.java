@@ -8,20 +8,20 @@ import jakarta.inject.Inject;
 
 @Stateless
 public class PessoaSalarioConsolidadoService {
-    
+
     @Inject
     private PessoaSalarioConsolidadoRepository pessoaSalarioConsolidadoRepository;
 
-    public void savePessoaSalarioConsolidado(PessoaSalarioConsolidado pessoaSalarioConsolidado) {
-        pessoaSalarioConsolidadoRepository.save(pessoaSalarioConsolidado);
+    public void savePessoaSalarioConsolidado(PessoaSalarioConsolidado psc) {
+        pessoaSalarioConsolidadoRepository.save(psc);
     }
 
-    public void updatePessoaSalarioConsolidado(PessoaSalarioConsolidado pessoaSalarioConsolidado) {
-        pessoaSalarioConsolidadoRepository.update(pessoaSalarioConsolidado);
+    public void updatePessoaSalarioConsolidado(PessoaSalarioConsolidado psc) {
+        pessoaSalarioConsolidadoRepository.update(psc);
     }
 
-    public void deletePessoaSalarioConsolidado(PessoaSalarioConsolidado pessoaSalarioConsolidado) {
-        pessoaSalarioConsolidadoRepository.delete(pessoaSalarioConsolidado);
+    public void deletePessoaSalarioConsolidado(PessoaSalarioConsolidado psc) {
+        pessoaSalarioConsolidadoRepository.delete(psc);
     }
 
     public PessoaSalarioConsolidado findPessoaSalarioConsolidadoById(Long id) {
